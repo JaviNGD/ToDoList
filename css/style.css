@@ -1,0 +1,12 @@
+body {
+    background: linear-gradient(
+        135deg,
+        #5292ec,
+        #61ffe5
+    );
+}
+
+h1 {
+    text-align: center;
+    font-family: "Poppins";
+}
