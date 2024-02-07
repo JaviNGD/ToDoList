@@ -37,7 +37,7 @@ const displayTasks = () => {
     taskInnerDiv.setAttribute("id", key);
     taskInnerDiv.innerHTML = `<span id="taskname">${key.split("_")[1]}</span>`;
 
-    // localstorage would store boolean as string so we parse it to boolean back
+    // Localstorage would store boolean as string so we parse it to boolean back
     let editButton = document.createElement("button");
     editButton.classList.add("edit");
     editButton.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
@@ -51,6 +51,56 @@ const displayTasks = () => {
     taskInnerDiv.innerHTML += `<button class="delete"><i class="fa-solid fa-trash"></i></button>`;
     tasksDiv.appendChild(taskInnerDiv);
   }
+
+  // Tasks completed
+  tasks = document.querySelectorAll(".task");
+  tasks.forEach((element, index) => {
+    element.onclick = () => {
+
+      // Local storage update
+      if (element.classList.contains("completed")) {
+        updateStorage(element.id.split("_")[0], element.innerText, false);
+      } else {
+        updateStorage(element.id.split("_")[0], element.innerText, true);
+      }
+    };
+  });
+
+  // Edit Tasks
+  editTasks = document.getElementsByClassName("edit");
+  Array.from(editTasks).forEach((element, index) => {
+    element.addEventListener("click", (e) => {
+      // Stop propogation to outer elements (if removed when we click delete eventually rhw click will move to parent)
+      e.stopPropagation();
+    
+      // Disable other edit buttons when one task is being edited
+      disableButtons(true);
+      
+      // Update input value and remove div
+      let parent = element.parentElement;
+      newTaskInput.value = parent.querySelector("#taskname").innerText;
+      
+      // Set updateNote to the task that is being edited
+      updateNote = parent.id;
+      
+      // Remove task
+      parent.remove();
+    });
+  });
+};
+
+// Disable Edit Button
+const disableButtons = (bool) => {
+  let editButtons = document.getElementsByClassName("edit");
+  Array.from(editButtons).forEach((element) => {
+    element.disabled = bool;
+  });
+};
+
+// Remove Task from local storage
+const removeTask = (taskValue) => {
+  localStorage.removeItem(taskValue);
+  displayTasks();
 };
 
 // Add tasks to local storage
@@ -62,10 +112,26 @@ const updateStorage = (index, taskValue, completed) => {
 // Function To Add New Task
 document.querySelector("#create").addEventListener("click", () => {
 
-    // Store locally and display from local storage
-    // new task
-    updateStorage(count, newTaskInput.value, false);
+  // Enable the edit button
+  disableButtons(false);
+  if (newTaskInput.value.length == 0) {
+    alert("Please Enter A Task");
+  } else {
 
+    // Store locally and display from local storage
+    if (updateNote == "") {
+
+      // New task
+      updateStorage(count, newTaskInput.value, false);
+    } else {
+
+      // Update task
+      let existingCount = updateNote.split("_")[0];
+      removeTask(updateNote);
+      updateStorage(existingCount, newTaskInput.value, false);
+      updateNote = "";
+    }
     count += 1;
     newTaskInput.value = "";
+  }
 });
