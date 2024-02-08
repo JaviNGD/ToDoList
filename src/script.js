@@ -87,6 +87,20 @@ const displayTasks = () => {
       parent.remove();
     });
   });
+
+  // Delete Tasks
+  deleteTasks = document.getElementsByClassName("delete");
+  Array.from(deleteTasks).forEach((element, index) => {
+    element.addEventListener("click", (e) => {
+      e.stopPropagation();
+      
+      // Delete from local storage and remove div
+      let parent = element.parentElement;
+      removeTask(parent.id);
+      parent.remove();
+      count -= 1;
+    });
+  });
 };
 
 // Disable Edit Button
@@ -135,3 +149,4 @@ document.querySelector("#create").addEventListener("click", () => {
     newTaskInput.value = "";
   }
 });
+

@@ -17,6 +17,7 @@ h1 {
     text-align: center;
     font-family: "Poppins";
     color: white;
+    font-weight: 800;
 }
 
 .container {
@@ -93,7 +94,7 @@ h1 {
   cursor: pointer;
 }
 .delete {
-  background-color: #fb3b3b;
+  background-color: #fd4444;
 }
 .edit {
   background-color: #5292ec;
