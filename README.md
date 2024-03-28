@@ -1,3 +1,31 @@
-<h1>To do List in JavaScript</h1>
+# To Do List App 📋
 
-<a href="https://javingd.github.io/ToDoList/">Preview</a>
+React-based Shopping List Application.
+
+## Demo
+
+View <a href='https://javingd.github.io/ToDoList/' target='_blank' rel="noreferrer">app preview</a>
+
+## Run Locally 
+
+Clone the project
+```plaintext
+git clone https://github.com/JaviNGD/ToDoList.git
+```
+
+Go to the project directory
+```plaintext
+cd ToDoList
+```
+
+Install dependencies
+```plaintext
+  npm install
+```
+
+Start the server
+```plaintext
+  npm start
+```
+
+🖋️
