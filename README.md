@@ -1,6 +1,6 @@
 # To Do List App 📋
 
-React-based Shopping List Application.
+To Do List Application developed with JavaScript, HTML and CSS.
 
 ## Demo
 
